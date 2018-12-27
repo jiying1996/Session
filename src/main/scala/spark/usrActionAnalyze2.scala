@@ -221,7 +221,7 @@ object usrActionAnalyze2 {
     }
     val top10CategoryRDD = sc.parallelize(list)
     // 计算每个品类被所有session点击的次数
-    val top10CategorySessionClick: RDD[(Long, String)] = top10CategoruSessionClickCount(sessionDetailRDD, top10CategoryRDD)
+    val top10CategorySessionClick: RDD[(Long, String)] = top10CategorySessionClickCount(sessionDetailRDD, top10CategoryRDD)
     val top10SessionRDD = calculateTop10Session(top10CategorySessionClick, taskid)
     //将每一个session的明细加进来，最后写到数据库
     insertTop10SessionDetail(top10SessionRDD, sessionDetailRDD, taskid)
@@ -299,7 +299,7 @@ object usrActionAnalyze2 {
     * @param top10CategoryRDD
     * @return
     */
-  def top10CategoruSessionClickCount(sessionDetailRDD: RDD[(String, (String, Row))], top10CategoryRDD: RDD[(Long, Long)]) = {
+  def top10CategorySessionClickCount(sessionDetailRDD: RDD[(String, (String, Row))], top10CategoryRDD: RDD[(Long, Long)]) = {
     // sessionDetailRDD根据sessionid进行分组
     // 数据(sessionid,iterator(sessionid,row))
     val sessionDetailsRDD = sessionDetailRDD.groupByKey()
