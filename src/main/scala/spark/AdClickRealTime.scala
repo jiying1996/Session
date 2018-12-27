@@ -2,7 +2,6 @@ package spark
 
 import java.util
 import java.util.{Date, Properties}
-
 import com.qf.sessionanalyze.dao.factory.DAOFactory
 import com.qf.sessionanalyze.domain._
 import com.qf.sessionanalyze.util.DateUtils
@@ -329,9 +328,7 @@ object AdClickRealTime {
 
   val func = (it: Iterator[(String, Seq[Int], Option[Int])]) => {
     it.map {
-      case (x, y, z) => {
-        (x, y.sum + z.getOrElse(0))
-      }
+      case (x, y, z) => (x, y.sum + z.getOrElse(0))
     }
   }
 }
