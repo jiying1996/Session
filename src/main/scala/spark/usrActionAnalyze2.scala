@@ -12,8 +12,6 @@ import com.qf.sessionanalyze.domain._
 import com.qf.sessionanalyze.util._
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
-import org.glassfish.jersey.internal.inject.Custom
-
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
@@ -124,7 +122,7 @@ object usrActionAnalyze2 {
     sparkSession.sql(sql).createOrReplaceTempView("temp")
 
     sparkSession.udf.register("group_concat_distinct", new CustomUDAF())
-    sparkSession.udf.register("json_analyze", (json: String, field: String)=> 
+    sparkSession.udf.register("json_analyze", (json: String, field: String)=>
       JSON.parseObject(json).getString(field)
     )
     val sql2 =
@@ -598,7 +596,7 @@ object usrActionAnalyze2 {
         sessionCount += count
       }
 
-      var hourExtractMap = dateHourExtrarctMap.get(date).getOrElse(null)
+      var hourExtractMap = dateHourExtrarctMap.getOrElse(date, null)
       if (hourExtractMap == null) {
         hourExtractMap = new mutable.HashMap[String, ListBuffer[Int]]()
         dateHourExtrarctMap.put(date, hourExtractMap)
@@ -613,7 +611,7 @@ object usrActionAnalyze2 {
         if (extractCount > count) extractCount = count.toInt
         //计算抽取的session索引信息
         var extractIndexList = new ListBuffer[Int]()
-        extractIndexList = hourExtractMap.get(hour).getOrElse(null)
+        extractIndexList = hourExtractMap.getOrElse(hour, null)
         if (extractIndexList == null) {
           extractIndexList = new ListBuffer[Int]()
           hourExtractMap.put(hour, extractIndexList)

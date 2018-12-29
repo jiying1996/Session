@@ -76,7 +76,7 @@ object PageOneStepConvetPage {
   }
 
   /**
-    * 计算单挑转换率
+    * 计算单跳转换率
     *
     * @param taskParam
     * @param pageSplitMap

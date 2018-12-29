@@ -136,6 +136,11 @@ object AdClickRealTime {
     })
   }
 
+  /**
+    * 4、	统计每天各省top3热门广告
+    *
+    * @param filtered
+    */
   def getProvinceTop3(filtered: DStream[(String, String, String, Long, Long)]) = {
     filtered.map(tuple => {
       // 拿到精确的天的日期
@@ -282,7 +287,7 @@ object AdClickRealTime {
               // 更新黑名单表
               val userId = str.split("_")(1).toLong
               val adBlacklist = new AdBlacklist
-
+              
               adBlacklist.setUserid(userId)
               adBlacklists.add(adBlacklist)
               val iter = selectAdBlacklists.listIterator()

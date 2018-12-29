@@ -2,7 +2,6 @@ package spark
 
 import java.util
 import java.util.{Date, Properties}
-
 import com.alibaba.fastjson.{JSON, JSONObject}
 import com.qf.sessionanalyze.constant.Constants
 import com.qf.sessionanalyze.dao.factory.DAOFactory
