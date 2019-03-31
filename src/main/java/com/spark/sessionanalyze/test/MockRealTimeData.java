@@ -50,7 +50,7 @@ public class MockRealTimeData extends Thread {
       String log = new Date().getTime() + " " + province + " " + city + " "
           + random.nextInt(100) + " " + random.nextInt(10);
       //producer.send(new KeyedMessage<Integer, String>("AdRealTimeLog", log));
-      producer.send(new ProducerRecord<Integer, String>("kafkakaka", log));
+      producer.send(new ProducerRecord<Integer, String>("test", log));
       //producer.send(new KeyedMessage<Integer, String>("AdRealTimeLog", log));
       System.out.println("生产数据成功:" + log);
       try {

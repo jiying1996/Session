@@ -63,7 +63,8 @@ object UsrActionAnalyze {
     val filteridSessionRDD = filterSessionByParamRDD(sessionId2AggregateInfoRDD, taskParam, sessionAccumulator)
 
     filteridSessionRDD.take(3).foreach(println)
-    //    calculatePercent(sessionAccumulator.value, taskId)
+    
+    calculatePercent(sessionAccumulator.value, taskId)
     //过滤后的数据session的明细
     val sessionDetailRDD = filteridSessionRDD.join(sessionId2ActionRDD).map(tuple => {
       (tuple._1, (tuple._1, tuple._2._2))
@@ -702,8 +703,6 @@ object UsrActionAnalyze {
       val sessionDetailDAO = DAOFactory.getSessionDetailDAO
       sessionDetailDAO.insertBatch(sessionDetails)
     })
-
-
   }
 
   /**

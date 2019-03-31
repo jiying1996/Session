@@ -45,7 +45,7 @@ object AdClickRealTime {
 
     // 5.统计各广告最近1小时内的点击量趋势，各广告最近1小时内各分钟的点击量，也是基于第2点的数据基础之上
     getLastHourEachMinut(filtered)
-
+    
     ssc.start()
     ssc.awaitTermination()
   }
@@ -239,7 +239,7 @@ object AdClickRealTime {
     props.setProperty("user", "root")
     props.setProperty("password", "123456")
     val tableName = "ad_blacklist"
-
+  
     var blackList: List[Int] = sparkSession.read.jdbc(url, tableName, props).rdd.map(_.getInt(0)).collect().toList.distinct
     // 生成个字段的tuple
     val tups = messages.filter(_._2.split(" ").length >= 5).map(line => {
